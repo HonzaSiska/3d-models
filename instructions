@@ -1,0 +1,23 @@
+# instal gltf-pipeline
+
+        npm install -g gltf-pipeline
+# compress glb file
+        gltf-pipeline -i fileName.glb -o fileName_compressed.glb --draco.compressionLevel=10
+
+# convert to jsx
+        npx gltfjsx fileName_compressed.glb
+
+#create react-app
+
+# instal react-drei
+        npm install @react-three/drei
+
+# instal react-three-fiber
+        npm install three @react-three/fiber
+
+
+# install valtio for state management
+        npm i valtio
+
+# import a color picker
+        npm i react-colorful

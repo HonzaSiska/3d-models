@@ -1,0 +1,17 @@
+.swatch{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin: 20px;
+    
+}
+.wood-swatches{
+    display: flex;
+    justify-content: center;
+    
+}
+.swatch:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    
+}

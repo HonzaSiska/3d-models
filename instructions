@@ -21,3 +21,7 @@
 
 # import a color picker
         npm i react-colorful
+
+# deployment
+        npm run build
+        firebase deploy

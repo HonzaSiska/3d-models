@@ -1,8 +1,70 @@
 a{
     text-decoration: none;
     color: black;
-    
+    font-size: large;   
 }
 a:visited{
     color: inherit;
+}
+.product-list{
+    text-align: left;
+    margin: 0 30px;
+}
+.product-list-item{
+    margin-top: 30px;
+}
+.product-list-item a{
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-radius: 3px;
+
+}
+.search{
+    position:relative;
+    display: inline-block;
+    text-align: start;
+}
+.search-results{
+    position: absolute;
+    background-color: #282c34;
+    color: white;
+    width: 100%;
+    margin-top: 2px;
+    border-radius: 3px;
+    
+    box-sizing: border-box;
+}
+.result-items {
+    border-bottom: 1px solid white;
+}
+.result-items a{
+    margin-left: 5px;
+    color: white;
+}
+.result-items a:visited{
+    color:white
+}
+
+.result-items div:hover {
+    background-color: gray;
+}
+.open-modal-btn{
+    margin-bottom: 20px;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background:rgb(46, 46, 127);
+    color: white;
+    border: 1px solid rgb(46, 46, 127);
+    border-radius: 5px;
+}
+.modal-btn-wrapper input{
+    margin-bottom: 20px;
+}
+.modal-buttons-wrapper button{
+    cursor: pointer;
+}
+.modal-buttons-wrapper button:hover{
+    color:rgb(46, 46, 127);
+    background-color: white;
 }

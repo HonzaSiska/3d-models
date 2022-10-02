@@ -5,7 +5,7 @@ import React, { lazy, Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { BakeShadows, OrbitControls, Stage, useGLTF } from '@react-three/drei'
 import { useSnapshot} from 'valtio'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { ProductState } from '../context/ProductProvider'
 import sample1 from '../swatches/sample-1.jpg'
@@ -19,11 +19,14 @@ export function Product() {
 const { woodState, setWoodState } = ProductState()
 const { hasSwatches } = ProductState()
 const { id } = useParams()
-
+const navigate = useNavigate()
 
 const upperCase = id[0].toUpperCase() + id.substring(1)
 
 const Component = lazy(()=> import(`../components/product-components/${upperCase}/${upperCase}`))
+
+
+
 
 return (
     <div >
@@ -45,7 +48,7 @@ return (
         
         <div style={{height: '60vh', textAlign: 'center'}}>
             <Suspense fallback={<div>Loading</div>}>
-                <Component />
+                {Component && <Component />}
             </Suspense>
           
         </div>

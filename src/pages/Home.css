@@ -12,11 +12,18 @@ a:visited{
 }
 .product-list-item{
     margin-top: 30px;
+    display: flex;
+    align-items: center;
 }
 .product-list-item a{
     border: 1px solid lightgrey;
     padding: 10px;
     border-radius: 3px;
+    margin-right:10px;
+
+}
+.product-list-item img{
+    cursor: pointer;
 
 }
 .search{

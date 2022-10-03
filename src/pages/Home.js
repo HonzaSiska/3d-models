@@ -8,6 +8,7 @@ import { collection , doc,  where, query, getDocs} from 'firebase/firestore'
 import SearchResults from '../components/search/SearchResults'
 import Modal from '../components/modal/Modal'
 import { useFirestore } from '../hooks/useFirestore'
+import DeleteIcon from '../assets/delete.svg'
 
 const Home = () => {
   const [ product, setProduct ]  = useState('')
@@ -15,6 +16,7 @@ const Home = () => {
   const { documents, error } = useCollection('products', ['productName', 'asc'])
   const {addDocument, deleteDocument, response} = useFirestore('products')
   const [ isOpen, setIsOpen ] = useState(false)
+  const [ deleteModalIsOpen, setDeleteModalIsOpen ] = useState(false)
   const [ newProduct, setNewProduct ] = useState({
     productName: '',
     category: '',
@@ -22,10 +24,19 @@ const Home = () => {
     image: '',
     path: ''
   })
+  
+  const [ productToDelete, setProductToDelete ] = useState({id: null, name:''})
 
   console.log(documents)
+  const handleDelete = (data) => {
+    setProductToDelete(data)
+    setDeleteModalIsOpen (true)
+  }
 
   const handleAdd = (prod)=> {
+    if(newProduct.productName === '' ||    newProduct.category=== '' || newProduct.description=== '' || newProduct.image=== ''){
+      return
+    }
     addDocument(prod)
     setIsOpen(false)
   }
@@ -61,9 +72,6 @@ const Home = () => {
     
   }
 
-
-  
-  
   return (
     <div>
         <h1>Models</h1>
@@ -83,7 +91,7 @@ const Home = () => {
               
             </div>
             <div className='search-results'>
-              {searchResults.length > 0  && <SearchResults data={searchResults}/>}
+              {searchResults.length > 0  && <SearchResults data={searchResults} deleteDocument={deleteDocument}/>}
             </div>
           </div> 
           
@@ -94,6 +102,8 @@ const Home = () => {
             documents.map(doc => (
               <div className='product-list-item' key={doc.id}>
                 <Link to={`/product/${doc.path}`}>{doc.productName}</Link>
+                <img style={{width:'25px'}} src={DeleteIcon} onClick={()=>handleDelete({id:doc.id, name: doc.productName})}/>
+                
               </div> 
             ))
           }
@@ -137,14 +147,56 @@ const Home = () => {
                       required
                       placeholder='description'
                       onChange={e=>setNewProduct({...newProduct, description: e.target.value})}
-                      
+                      value={newProduct.description}
                     >
-                    {newProduct.description}
+                    
                     </textarea>
                   </div>
                   <div className='modal-buttons-wrapper' style={{display: 'flex', justifyContent:'space-around',marginTop:'20px'}}>
-                    <button style={{padding: '10px 15px', border:'1px solid white',fontWeight:'bold', background:'rgb(46, 46, 127)',color:'white',borderRadius:'5px'}} className='modal-delete-btn' onClick={()=>handleAdd(newProduct)}>Create</button>
-                    <button style={{padding: '10px 15px',border:'1px solid white', fontWeight:'bold',background:'rgb(46, 46, 127)',color:'white',borderRadius:'5px'}} className='modal-cancel-btn' onClick={()=>setIsOpen(false)}>Cancel</button>
+                    <button 
+                      style={{padding: '10px 15px', border:'1px solid white',fontWeight:'bold', background:'rgb(46, 46, 127)',color:'white',borderRadius:'5px'}} 
+                      className='modal-delete-btn' 
+                      onClick={()=>{
+                        handleAdd(newProduct);
+                        setNewProduct({
+                          productName: '',
+                          category: '',
+                          description: '',
+                          image: '',
+                          path: ''
+                        })
+                    }}>
+                    Create
+                    </button>
+                    <button 
+                      style={{padding: '10px 15px',border:'1px solid white', fontWeight:'bold',background:'rgb(46, 46, 127)',color:'white',borderRadius:'5px'}} className='modal-cancel-btn' 
+                      onClick={
+                        ()=>{
+                          setIsOpen(false);
+                          setNewProduct({
+                            productName: '',
+                            category: '',
+                            description: '',
+                            image: '',
+                            path: ''
+                        })
+                      }}>
+                      Cancel
+                      </button>
+                  </div> 
+                </div>
+            </Modal>
+        }
+
+        {
+          deleteModalIsOpen && 
+            <Modal>
+                <h1 style={{textAlign:'center', color:'white'}}>Delete Product</h1>
+                <h3 style={{textAlign:'center', color:'white'}}>{productToDelete.name}</h3>
+                <div className='modal-btn-wrapper'> 
+                  <div className='modal-buttons-wrapper' style={{display: 'flex', justifyContent:'space-around',marginTop:'20px'}}>
+                    <button style={{padding: '10px 15px', border:'1px solid white',fontWeight:'bold', background:'rgb(46, 46, 127)',color:'white',borderRadius:'5px'}} className='modal-delete-btn' onClick={()=>{deleteDocument(productToDelete.id); setDeleteModalIsOpen(false)}}>Delete</button>
+                    <button style={{padding: '10px 15px',border:'1px solid white', fontWeight:'bold',background:'rgb(46, 46, 127)',color:'white',borderRadius:'5px'}} className='modal-cancel-btn' onClick={()=>setDeleteModalIsOpen (false)}>Cancel</button>
                   </div> 
                 </div>
             </Modal>

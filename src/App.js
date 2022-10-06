@@ -1,9 +1,11 @@
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/navbar/Navbar';
-import ProductProvider from './context/ProductProvider';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Product from './pages/Product';
+import Register from './pages/Register';
+
 
 
 function App() {
@@ -15,7 +17,8 @@ function App() {
         </header>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/login' element={<Login/>}/>
           <Route path='/product/:id' element={<Product/>}/>
           
           {/* <Route path='/product/login' element={<Login/>}/> */}

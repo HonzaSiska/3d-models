@@ -9,12 +9,15 @@ import SearchResults from '../components/search/SearchResults'
 import Modal from '../components/modal/Modal'
 import { useFirestore } from '../hooks/useFirestore'
 import DeleteIcon from '../assets/delete.svg'
+import { useAuthContext } from '../hooks/useAuthContext'
+
 
 const Home = () => {
   const [ product, setProduct ]  = useState('')
   const [ searchResults, setSearchResults ] = useState([])
   const { documents, error } = useCollection('products', ['productName', 'asc'])
   const {addDocument, deleteDocument, response} = useFirestore('products')
+  const {user} = useAuthContext()
   const [ isOpen, setIsOpen ] = useState(false)
   const [ deleteModalIsOpen, setDeleteModalIsOpen ] = useState(false)
   const [ newProduct, setNewProduct ] = useState({
@@ -34,7 +37,7 @@ const Home = () => {
   }
 
   const handleAdd = (prod)=> {
-    if(newProduct.productName === '' ||    newProduct.category=== '' || newProduct.description=== '' || newProduct.image=== ''){
+    if(newProduct.productName === '' ||    newProduct.category=== '' || newProduct.description=== '' || newProduct.path=== '' ){
       return
     }
     addDocument(prod)
@@ -77,7 +80,7 @@ const Home = () => {
         <h1>Models</h1>
         <div >
           <div>
-            <button className='open-modal-btn' onClick={()=>setIsOpen(true)}>New Product</button>
+            {user && <button className='open-modal-btn' onClick={()=>setIsOpen(true)}>New Product</button>}
           </div>
           <div className='search'>
             <input 
@@ -102,7 +105,7 @@ const Home = () => {
             documents.map(doc => (
               <div className='product-list-item' key={doc.id}>
                 <Link to={`/product/${doc.path}`}>{doc.productName}</Link>
-                <img style={{width:'25px'}} src={DeleteIcon} onClick={()=>handleDelete({id:doc.id, name: doc.productName})}/>
+                {user &&<img style={{width:'25px'}} src={DeleteIcon} onClick={()=>handleDelete({id:doc.id, name: doc.productName})}/>}
                 
               </div> 
             ))

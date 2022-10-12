@@ -78,6 +78,7 @@ const Home = () => {
   return (
     <div>
         <h1>Models</h1>
+        
         <div >
           <div>
             {user && <button className='open-modal-btn' onClick={()=>setIsOpen(true)}>New Product</button>}

@@ -15,3 +15,47 @@
     opacity: 0.8;
     
 }
+.tag{
+    color: rgb(142, 207, 238);
+}
+.source{
+    color:orange;
+    
+}
+.link{
+    color: rgb(192, 243, 192);
+    text-decoration: underline;
+}
+.code-snippet{
+    display: flex;
+    justify-content: center;
+    margin:40px 0;
+}
+.code-snippet-content{
+    background-color: rgb(21, 21, 21);
+    padding: 5px 20px 40px;
+    border-radius: 10px;
+}
+.closeSnippet{
+    display: flex;
+    justify-content: end;
+    color:white;
+}
+.closeSnippet span{
+    
+    cursor: pointer;
+}
+.embed-dims{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    
+}
+.embed-dims input{
+    width: 30%;
+    
+}
+.embed-dims p{
+    color: white;
+    
+}

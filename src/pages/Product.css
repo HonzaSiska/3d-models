@@ -29,6 +29,7 @@
 .code-snippet{
     display: flex;
     justify-content: center;
+    align-items:baseline;
     margin:40px 0;
 }
 .code-snippet-content{

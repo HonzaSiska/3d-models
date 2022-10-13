@@ -13,6 +13,8 @@ import sample1 from '../swatches/sample-1.jpg'
 import sample2 from '../swatches/sample-2.jpg'
 import sample3 from '../swatches/sample-3.jpg'
 import './Product.css'
+import Remove from '../assets/remove.png'
+import Check from '../assets/check.png'
 
 export function Product() {
 
@@ -66,7 +68,7 @@ export function Product() {
                   <span onClick={() => setIsEmbedable(!isEmbedable)}>x</span>
                 </div>
                 <div className='embed-dims'>
-                  <lavel>
+                  <label>
                     <p>Width</p>
                     <input
                       type='text'
@@ -74,7 +76,18 @@ export function Product() {
                       onChange={(e) => { setWidth(e.target.value) }}
                       value={width}
                     />
-                  </lavel>
+                  </label>
+                  <label>
+                    <p> Scrollbar Allowed</p>
+                    <div>
+                      <img swtyle={{width:'15px'}} src={isScrollable ? Check : Remove}/>
+                    </div>
+                    <input
+                      type='checkbox'
+                      onChange={(e) => {!isScrollable ? setIsScrollable(true): setIsScrollable(false) }}
+                      checked={isScrollable}
+                    />
+                  </label>
                   <label>
                     <p>Height</p>
                     <input
@@ -84,6 +97,7 @@ export function Product() {
                       value={height}
                     />
                   </label>
+                  
                 </div>
                 <h4 style={{color:'white'}}>copy snippet of code to embed in your web site</h4>
                 <span className='tag'>{`<iframe`}</span>
@@ -91,6 +105,8 @@ export function Product() {
                 <span className='link'>'{`${url}`}'</span>
                 <span className='source'>{`  width='${width}`}'</span>
                 <span className='source'>{`  height='${height}`}'</span>
+                <span className='source'>{`  frameBorder='0'`}</span>
+           
                 { !isScrollable && <span className='source'>{`  scrolling='no`}'</span>}
                 <span className='tag'>{`></iframe>`}</span>
               </div>

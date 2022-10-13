@@ -81,7 +81,6 @@ import { ProductState } from '../../../context/ProductProvider.js'
   return (
     <div >
       <p style={{textAlign: 'center'}}>use mouse to rotate the model, mouse wheel to resize</p>
-      <h3 style={{textAlign: 'center'}}>Author: Jan Siska</h3>
       <div >
         <div style={{height: '80vh', textAlign: 'center'}}>
           <h1 >Coyotepe Stool</h1>

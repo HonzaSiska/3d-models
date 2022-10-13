@@ -45,11 +45,8 @@ import Image from './Soborg.glb'
 import { ProductState } from '../../../context/ProductProvider.js'
 
 
-
 function Soborg(props) {
   
- 
- 
   const { woodState, setWoodState, hasSwatches, setHasSwatches } = ProductState()
  
 
@@ -129,8 +126,8 @@ function Soborg(props) {
 
   return (
     <div >
+    
       <p style={{ textAlign: 'center' }}>use mouse to rotate the model, mouse wheel to resize</p>
-      <h3 style={{ textAlign: 'center' }}>Author: Jan Siska</h3>
       <div >
       {/* <img src={sample1}/> */}
         <div style={{ height: '80vh', textAlign: 'center' }}>
